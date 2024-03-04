@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const router = express.Router()
+const bcrypt = require('bcryptjs')
 mongoose.connect("mongodb://127.0.0.1/Map")
 const User = require('../model/userSchema')
 router.get('/', (req, resp) => {
@@ -55,20 +56,20 @@ router.post('/register', async (req, resp) => {
 
         if (userExist) {
             return resp.status(422).json({ error: "Email already exist" })
-        }else if(password != cpassword){
+        } else if (password != cpassword) {
             return resp.status(422).json({ error: 'Password does not match' });
-        }else{
+        } else {
             const user = new User({ name, email, phone, work, password, cpassword })
 
-        const userRegister = await user.save()
+            const userRegister = await user.save()
 
-        if(userRegister){
-            console.log(userRegister);
-            return resp.status(201).json({ Message: "user registered successfully" })
+            if (userRegister) {
+                console.log(userRegister);
+                return resp.status(201).json({ Message: "user registered successfully" })
+            }
         }
-        }
-            
-        
+
+
     } catch (err) {
         console.log(err);
     }
@@ -84,20 +85,20 @@ router.post('/signin', async (req, resp) => {
         }
 
         const userLogin = await User.findOne({ email: email })
-        console.log(userLogin);
+        //console.log(userLogin);
 
-        if (!userLogin) {
-            return resp.status(400).json({ error: "Invalid Credentials" })
+        if (userLogin) {
+
+            const isMatch = await bcrypt.compare(password, userLogin.password)
+
+            if (!isMatch) {
+                return resp.status(400).json({ error: "Invalid Credentials" })
+            } else {
+                resp.status(200).json({ message: "Signin successful" })
+                console.log(isMatch);
+                console.log('Signin Successful');
+            }
         }
-
-        if (password !== userLogin.password) {
-            return resp.status(400).json({ error: "Invalid Credentials" })
-        }
-
-        // At this point, user is successfully authenticated
-        // You can generate a token or set a session here
-        resp.status(200).json({ message: "Signin successful" })
-
     } catch (err) {
         console.log(err)
         resp.status(500).send("Internal Server Error")
