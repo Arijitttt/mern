@@ -55,8 +55,10 @@ router.post('/register', async (req, resp) => {
 
         if (userExist) {
             return resp.status(422).json({ error: "Email already exist" })
-        }
-        const user = new User({ name, email, phone, work, password, cpassword })
+        }else if(password != cpassword){
+            return resp.status(422).json({ error: 'Password does not match' });
+        }else{
+            const user = new User({ name, email, phone, work, password, cpassword })
 
         const userRegister = await user.save()
 
@@ -64,6 +66,9 @@ router.post('/register', async (req, resp) => {
             console.log(userRegister);
             return resp.status(201).json({ Message: "user registered successfully" })
         }
+        }
+            
+        
     } catch (err) {
         console.log(err);
     }
