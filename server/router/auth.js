@@ -2,6 +2,8 @@ const express = require('express')
 const mongoose = require('mongoose')
 const router = express.Router()
 const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
+require('dotenv').config()
 mongoose.connect("mongodb://127.0.0.1/Map")
 const User = require('../model/userSchema')
 router.get('/', (req, resp) => {
@@ -90,6 +92,10 @@ router.post('/signin', async (req, resp) => {
         if (userLogin) {
 
             const isMatch = await bcrypt.compare(password, userLogin.password)
+
+
+            const token =await userLogin.generateAuthToken()
+            console.log(token);
 
             if (!isMatch) {
                 return resp.status(400).json({ error: "Invalid Credentials" })
