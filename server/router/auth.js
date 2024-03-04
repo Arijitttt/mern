@@ -51,6 +51,7 @@ router.post('/register', async (req, resp) => {
 
     try {
         const userExist = await User.findOne({ email: email })
+        console.log(userExist)
 
         if (userExist) {
             return resp.status(422).json({ error: "Email already exist" })
@@ -67,4 +68,35 @@ router.post('/register', async (req, resp) => {
         console.log(err);
     }
 })
+
+
+router.post('/signin', async (req, resp) => {
+    try {
+        const { email, password } = req.body
+
+        if (!email || !password) {
+            return resp.status(400).json({ error: "Please provide your email and password." })
+        }
+
+        const userLogin = await User.findOne({ email: email })
+        console.log(userLogin);
+
+        if (!userLogin) {
+            return resp.status(400).json({ error: "Invalid Credentials" })
+        }
+
+        if (password !== userLogin.password) {
+            return resp.status(400).json({ error: "Invalid Credentials" })
+        }
+
+        // At this point, user is successfully authenticated
+        // You can generate a token or set a session here
+        resp.status(200).json({ message: "Signin successful" })
+
+    } catch (err) {
+        console.log(err)
+        resp.status(500).send("Internal Server Error")
+    }
+})
+
 module.exports = router
