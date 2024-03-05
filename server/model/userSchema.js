@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 require('dotenv').config()
 
 // Define User Schema
-mongoose.connect("mongodb://127.0.0.1/Map")
+//mongoose.connect("mongodb://127.0.0.1/Map")
 const UserSchema = new mongoose.Schema({
     name:{type:String,required:true},
     
@@ -48,7 +48,7 @@ UserSchema.methods.generateAuthToken = async function(){
 }
 
 
-const UserModel = mongoose.model('testings',UserSchema)
+const UserModel = mongoose.model('gui',UserSchema)
 module.exports = UserModel
 
 

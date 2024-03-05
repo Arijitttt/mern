@@ -4,7 +4,6 @@ const router = express.Router()
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
-mongoose.connect("mongodb://127.0.0.1/Map")
 const User = require('../model/userSchema')
 router.get('/', (req, resp) => {
     resp.send(`Homepage from router.js`);

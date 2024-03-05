@@ -1,10 +1,15 @@
 const express = require('express')
-//const dotenv = require('dotenv')
+const dotenv = require('dotenv')
 const app = express()
 const mongoose = require('mongoose')
-const DB = 'mongodb+srv://abhattacharya030:table@table.rw8gnnh.mongodb.net/?retryWrites=true&w=majority&appName=table'
 
-//require('./db/conn.js');
+dotenv.config({path:'./.env'});
+
+const PORT = process.env.PORT
+
+
+
+require('./db/conn.js');
 //const User = require('./model/userSchema')
 
 app.use(express.json())
@@ -35,6 +40,6 @@ app.get('/login',(req,resp)=>{
 app.get('/register',(req,resp)=>{
     resp.send(`registration page`);
 })
-app.listen(3000,()=>{
-    console.log(`server is running on port 3000`);
+app.listen(PORT,()=>{
+    console.log(`server is running on port no ${PORT}`);
 })
