@@ -6,21 +6,23 @@ import Contact from './components/Contact/Contact'
 import About from './components/About/About'
 import Login from './components/Login/Login'
 import SignUp from './components/SignUp/SignUp'
-
+import { BrowserRouter as Router, Route, Routes, BrowserRouter } from 'react-router-dom';
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-     Hi, from react 
      <Nnavbar/>
-     <Home/>
-     <Contact/>
-     <About/>
-     <Login/>
-     <SignUp/>
-     
+
+     {/* routing */}
+     <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+        </Routes>
     </>
   )
 }
