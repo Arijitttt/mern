@@ -7,6 +7,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
+import img1 from '../../assets/navAi.jpg'
 export default function Nnavbar() {
   return (
     <>
@@ -14,7 +15,9 @@ export default function Nnavbar() {
     /* bootstrap navbar */}
      <Navbar expand="lg" className="bg-body-tertiary">
         <Container fluid>
-          <Navbar.Brand as={Link} to="/">Mern Developing</Navbar.Brand>
+          <Navbar.Brand as={Link} to="/" className='navImg'>
+            <img src={img1} alt="img1" />
+            </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav
