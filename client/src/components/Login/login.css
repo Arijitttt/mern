@@ -1,0 +1,103 @@
+.login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15vh;
+    
+  }
+  .mainBox {
+    width: 65vw;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 20px;
+    box-shadow: -19px 9px 14px 0px rgba(0, 0, 0, 0.1);
+    
+  }
+  
+  .formWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+  }
+  .inputField {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    outline: none;
+  }
+  .inputs {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    outline: none;
+    font-size: 16px;
+    margin-top: 5px;
+  }
+  .inputs input {
+    outline: none;
+    border: none;
+    line-height: 0.5;
+    transition: 0.1s ease-in-out;
+    scale: 1.1;
+  }
+  .inputs input:focus {
+    outline: none;
+    border-bottom: 2px solid rgb(0, 0, 0);
+  }
+  .btn input {
+    outline: none;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    cursor: pointer;
+    transition: 0.6s ease-in-out;
+  }
+  .btn input:hover {
+    background-color: white;
+    color: black;
+    letter-spacing: 2px;
+  }
+  .rightImg {
+    display: flex;
+    flex-direction: column;
+  }
+  .rightImg a{
+      text-decoration: none;
+      color: black;
+      cursor: pointer;
+      margin-top: 5px;
+      transition: 0.5s ease;
+      text-decoration: underline;
+  }
+  .rightImg a:hover {
+      text-decoration: none;
+      letter-spacing: 2px;
+  }
+  .rightImg img {
+    width: 35vw;
+    height: 60vh;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+  .registrationWrapper{
+    display: flex;
+    justify-content: space-between;
+  }
+  .googleBtn{
+    height: 40px;
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    cursor: pointer;
+    padding-bottom: 50px;
+  }
