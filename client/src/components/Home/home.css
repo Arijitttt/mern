@@ -1,0 +1,30 @@
+.homeRoot{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    
+}
+.left {
+    
+    background-color: aqua;
+}
+.wrapper{
+    text-align: center;
+
+}
+.wrapper h3{
+    animation: example 2s ease-in-out infinite;
+    -webkit-animation: example 2s ease-in-out infinite;/* Safari and Chrome */
+}
+
+@keyframes example {
+    0%   {color: red;
+    letter-spacing: 0px;
+    }
+    25%  {color: yellow;}
+    50%  {color: blue;}
+    100% {color: green;
+    letter-spacing: 3px;
+    }
+  }
