@@ -6,6 +6,7 @@ import Contact from './components/Contact/Contact'
 import About from './components/About/About'
 import Login from './components/Login/Login'
 import SignUp from './components/SignUp/SignUp'
+import Error from './components/404-page/Error'
 import { BrowserRouter as Router, Route, Routes, BrowserRouter } from 'react-router-dom';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="*" element={<Error />} />
         </Routes>
     </>
   )
