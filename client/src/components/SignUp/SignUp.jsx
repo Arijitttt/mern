@@ -8,13 +8,25 @@ import { ImProfile } from "react-icons/im";
 import { PiPasswordFill } from "react-icons/pi";
 import { TbPasswordUser } from "react-icons/tb";
 import { Link, NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function SignUp() {
+
+  const navigate = useNavigate();
+  // const fetchUsers = () => {
+  //   axios.get("http://localhost:5000/register").then((res) => {
+  //     console.log(res.data);
+  //   });
+  // };
+  //const history =unstable_HistoryRouter();
+
+  //states for input fields and error messages
   const [user, setUSer] = useState({
     name: "",
     email: "",
-    number: "",
-    profession:"",
+    phone: "",
+    work:"",
     password: "",
     cpassword:""
   });
@@ -27,6 +39,31 @@ export default function SignUp() {
 
     setUSer({...user, [name]:value})
   }
+
+  const postData =async (e)=>{
+    e.preventDefault()
+    const { name,email,phone,work,password,cpassword}=user;
+    const resp=await fetch("http://localhost:5000/register",{
+      method : "POST",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify({
+        name,email,phone,work,password,cpassword
+      })
+    })
+
+    const data = await resp.json();
+    if(data.status === 422 || !resp){
+      window.alert("Invalid Registration")
+      console.log("Invalid Registration")
+    }else{
+      window.alert("Registration Successful")
+      console.log("Registration Successful")
+
+      //history.push("/login")
+    }
+  }
   return (
     <>
       <div className="signUp">
@@ -36,7 +73,7 @@ export default function SignUp() {
               <div className="heading">
                 <h2>SignUp</h2>
               </div>
-              <form action="">
+              <form method="post" action="POST">
                 <div className="inputField">
                   <div className="inputs">
                     <MdOutlineDriveFileRenameOutline className="icon" />
@@ -68,12 +105,12 @@ export default function SignUp() {
                     <FaPhone className="icon" />
                     <input
                       type="number"
-                      name="number"
+                      name="phone"
                       id="number"
-                      autoComplete="off"
+                      autoComplete="on"
                       placeholder="Your phone number"
 
-                      value={user.number}
+                      value={user.phone}
                       onChange={handleInputs}
                     />
                   </div>
@@ -81,12 +118,12 @@ export default function SignUp() {
                     <ImProfile className="icon" />
                     <input
                       type="text"
-                      name="profession"
+                      name="work"
                       id="profession"
                       autoComplete="off"
                       placeholder="Your profession"
 
-                      value={user.profession}
+                      value={user.work}
                       onChange={handleInputs}
                     />
                   </div>
@@ -107,9 +144,9 @@ export default function SignUp() {
                     <PiPasswordFill className="icon" />
                     <input
                       type="password"
-                      name="password"
-                      id="password"
-                      autoComplete="off"
+                      name="cpassword"
+                      id="cpassword"
+                      autoComplete="on"
                       placeholder="Confirm your password"
 
 
@@ -119,7 +156,10 @@ export default function SignUp() {
                   </div>
                 </div>
                 <div className="btn">
-                  <input type="submit" name="submit" id="submit" />
+                  <input type="submit" name="submit" id="submit"
+
+                  onClick={postData}
+                  />
                 </div>
               </form>
             </div>
