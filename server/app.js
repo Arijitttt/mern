@@ -37,9 +37,7 @@ app.get('/contact',(req,resp)=>{
 app.get('/login',(req,resp)=>{
     resp.send(`login page`);
 })
-app.get('/register',(req,resp)=>{
-    resp.send(`registration page`);
-})
+
 app.listen(PORT,()=>{
     console.log(`server is running on port no ${PORT}`);
 })
